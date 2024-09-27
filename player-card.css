@@ -5,6 +5,12 @@
     --background-size: center center;
 }
 
+.player_card_container {
+    display: flex;
+    justify-content: center;  /* Centers the cards horizontally */
+    gap: 5px;  /* Adds space between the cards */
+}
+
 body {
     font-family: 'Tilt Warp', sans-serif; /* or any other element */
 }
@@ -16,11 +22,7 @@ body {
     height: var(--card-height);
     display: grid;
     grid-template-rows: 1fr auto; /* Keep the top flexible and the bottom fixed */
-    animation: resize_test 2s cubic-bezier(1, 0, 0, 1) infinite;
-}
-
-.player_card_base.a {
-    animation: resize_test 1s cubic-bezier(1, 0, 0, 1) infinite;
+    /*animation: resize_test 2s cubic-bezier(1, 0, 0, 1) infinite;*/
 }
 
 @keyframes resize_test {

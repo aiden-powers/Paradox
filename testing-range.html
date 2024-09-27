@@ -6,10 +6,70 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
-    <div class="player_card_base">
+<div class="player_card_container">
+    <div class="player_card_base" id="playerCard1">
         <p class="player_card_text_character"> Character </p>
         <p class="player_card_text_username"> Username </p>
     </div>
+    <div class="player_card_base" id="playerCard2">
+        <p class="player_card_text_character"> Character </p>
+        <p class="player_card_text_username"> Username </p>
+    </div>
+    <div class="player_card_base" id="playerCard3">
+        <p class="player_card_text_character"> Character </p>
+        <p class="player_card_text_username"> Username </p>
+    </div>
+    <div class="player_card_base" id="playerCard4">
+        <p class="player_card_text_character"> Character </p>
+        <p class="player_card_text_username"> Username </p>
+    </div>
+    <div class="player_card_base" id="playerCard5">
+        <p class="player_card_text_character"> Character </p>
+        <p class="player_card_text_username"> Username </p>
+    </div>
+    <div class="player_card_base" id="playerCard6">
+        <p class="player_card_text_character"> Character </p>
+        <p class="player_card_text_username"> Username </p>
+    </div>
+</div>
+<script>
+    function changeCardImage(id, imageUrl) {
+        const playerCard = document.getElementById(id);
+        playerCard.style.backgroundImage = `url(${imageUrl})`;
+    }
+    function changeAnimationDelayAndDuration(id, duration) {
+        const playerCard = document.getElementById(id);
+        playerCard.style.animationDuration = duration;
+    }
+    function startAnimation(id) {
+        //const playerCard = document.getElementById(id);
+
+        // Remove the animation class (if any) to reset the animation
+        //playerCard.style.animation = 'none';
+
+        // Trigger reflow to restart the animation
+        //playerCard.offsetHeight; // Forces a reflow (this is needed)
+
+        // Reapply the animation (adjust animation properties if needed)
+        //playerCard.style.animation = 'resize_test 2s cubic-bezier(1, 0, 0, 1)';
+    }
+
+    changeAnimationDelayAndDuration("playerCard1", "2s");
+    changeAnimationDelayAndDuration("playerCard2", "2.1s");
+    changeAnimationDelayAndDuration("playerCard3", "2.2s");
+    changeAnimationDelayAndDuration("playerCard4", "2.3s");
+    changeAnimationDelayAndDuration("playerCard5", "2.4s");
+    changeAnimationDelayAndDuration("playerCard6", "2.5s");
+
+    changeCardImage("playerCard1", "https://deadlocked.wiki/images/6/6d/Abrams_card.png");
+    changeCardImage("playerCard2", "https://deadlocked.wiki/images/4/49/Bebop_card.png");
+    changeCardImage("playerCard3", "https://deadlocked.wiki/images/7/70/Dynamo_card.png");
+    changeCardImage("playerCard4", "https://deadlocked.wiki/images/6/6b/Infernus_card.png");
+    changeCardImage("playerCard5", "https://deadlocked.wiki/images/e/e8/Lady_Geist_card.png");
+    changeCardImage("playerCard6", "https://deadlocked.wiki/images/5/55/McGinnis_card.png");
+
+</script>
 </body>
 </html>
