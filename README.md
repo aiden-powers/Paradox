@@ -1,2 +1,2 @@
 # Paradox for Deadlock
-Deadlock broadcast managment
+Deadlock broadcast management
