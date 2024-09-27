@@ -1,0 +1,65 @@
+:root {
+    --card-width: 128px;
+    --card-height: 256px;
+    --background: #efefef;
+    --background-size: center center;
+}
+
+body {
+    font-family: 'Tilt Warp', sans-serif; /* or any other element */
+}
+
+.player_card_base {
+    background: var(--background) url("https://deadlocked.wiki/images/6/6b/Infernus_card.png") var(--background-size);
+    background-size: cover;
+    width: var(--card-width);
+    height: var(--card-height);
+    display: grid;
+    grid-template-rows: 1fr auto; /* Keep the top flexible and the bottom fixed */
+    animation: resize_test 2s cubic-bezier(1, 0, 0, 1) infinite;
+}
+
+.player_card_base.a {
+    animation: resize_test 1s cubic-bezier(1, 0, 0, 1) infinite;
+}
+
+@keyframes resize_test {
+    0% {
+        width: 128px;
+        height: 256px;
+    }
+    50% {
+        width: 128px;
+        height: 128px;
+    }
+    100% {
+        width: 128px;
+        height: 128px;
+    }
+}
+
+.player_card_base > * {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+.player_card_text_username {
+    background: #EFDEBF;
+    color: #34322E;
+
+    text-align: center;
+    width: 100%; /* Full width */
+    height: auto; /* Allow height to adjust based on content */
+    align-self: end; /* Align to the bottom of the grid cell */
+    padding: 5px 0; /* Optional: Add some padding for better spacing */
+}
+.player_card_text_character {
+    background: #1A1A1A;
+    color: #EFDEBF;
+
+    text-align: center;
+    width: 100%; /* Full width */
+    height: auto; /* Allow height to adjust based on content */
+    align-self: end; /* Align to the bottom of the grid cell */
+    padding: 5px 0; /* Optional: Add some padding for better spacing */
+}
