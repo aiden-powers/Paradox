@@ -1,5 +1,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet">
 <!DOCTYPE html>
+<script type="text/javascript" src="jquery-3.7.1.min.js"></script>
 <html lang="en">
 <link rel="stylesheet" href="player-card.css">
 <head>
@@ -7,7 +8,7 @@
     <title>Title</title>
 </head>
 
-<body>
+<body style="margin-top: 100px;">
 <div class="player_card_container">
     <div class="player_card_base" id="playerCard1">
         <p class="player_card_text_character"> Character </p>
@@ -34,42 +35,52 @@
         <p class="player_card_text_username"> Username </p>
     </div>
 </div>
+
 <script>
     function changeCardImage(id, imageUrl) {
         const playerCard = document.getElementById(id);
         playerCard.style.backgroundImage = `url(${imageUrl})`;
     }
-    function changeAnimationDelayAndDuration(id, duration) {
+    function toggleSize(id) {
         const playerCard = document.getElementById(id);
-        playerCard.style.animationDuration = duration;
+        playerCard.classList.toggle('end-state');
     }
-    function startAnimation(id) {
-        //const playerCard = document.getElementById(id);
-
-        // Remove the animation class (if any) to reset the animation
-        //playerCard.style.animation = 'none';
-
-        // Trigger reflow to restart the animation
-        //playerCard.offsetHeight; // Forces a reflow (this is needed)
-
-        // Reapply the animation (adjust animation properties if needed)
-        //playerCard.style.animation = 'resize_test 2s cubic-bezier(1, 0, 0, 1)';
+    function addTransition(id) {
+        const playerCard = document.getElementById(id);
+        //'width 2s cubic-bezier(1, 0, 0, 1), height 2s cubic-bezier(1, 0, 0, 1)'
+        playerCard.style.transition = '1s cubic-bezier(1, 0, 0, 1)';
+    }
+    function removeTransition(id) {
+        const playerCard = document.getElementById(id);
+        playerCard.style.transition = 'none';
+    }
+    function changeCardText(id, playerCharacter, playerUsername) {
+        const playerCard = document.getElementById(id);
+        const character = playerCard.querySelector('.player_card_text_character')
+        const username = playerCard.querySelector('.player_card_text_username')
+        character.textContent=playerCharacter;
+        username.textContent=playerUsername;
     }
 
-    changeAnimationDelayAndDuration("playerCard1", "2s");
-    changeAnimationDelayAndDuration("playerCard2", "2.1s");
-    changeAnimationDelayAndDuration("playerCard3", "2.2s");
-    changeAnimationDelayAndDuration("playerCard4", "2.3s");
-    changeAnimationDelayAndDuration("playerCard5", "2.4s");
-    changeAnimationDelayAndDuration("playerCard6", "2.5s");
-
-    changeCardImage("playerCard1", "https://deadlocked.wiki/images/6/6d/Abrams_card.png");
+    // Example of changing the images
+    changeCardImage("playerCard1", "../Patron/Cards/DefaultBackup.png");
     changeCardImage("playerCard2", "https://deadlocked.wiki/images/4/49/Bebop_card.png");
     changeCardImage("playerCard3", "https://deadlocked.wiki/images/7/70/Dynamo_card.png");
     changeCardImage("playerCard4", "https://deadlocked.wiki/images/6/6b/Infernus_card.png");
     changeCardImage("playerCard5", "https://deadlocked.wiki/images/e/e8/Lady_Geist_card.png");
     changeCardImage("playerCard6", "https://deadlocked.wiki/images/5/55/McGinnis_card.png");
 
+    changeCardText("playerCard1", "Abrams", "MyUsername")
+
+    // Example of adding an animation (optional, but transitions are applied automatically)
+    addTransition("playerCard1");
+    addTransition("playerCard2");
+
+    // Toggle the size when needed
+    document.getElementById("playerCard1").addEventListener("click", () => toggleSize("playerCard1"));
+    toggleSize("playerCard2");
+    document.getElementById("playerCard2").addEventListener("click", () => toggleSize("playerCard2"));
 </script>
+
 </body>
 </html>

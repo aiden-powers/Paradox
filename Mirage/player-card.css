@@ -7,8 +7,8 @@
 
 .player_card_container {
     display: flex;
-    justify-content: center;  /* Centers the cards horizontally */
-    gap: 5px;  /* Adds space between the cards */
+    justify-content: center;  /* Centers the Cards horizontally */
+    gap: 5px;  /* Adds space between the Cards */
 }
 
 body {
@@ -16,13 +16,24 @@ body {
 }
 
 .player_card_base {
-    background: var(--background) url("https://deadlocked.wiki/images/6/6b/Infernus_card.png") var(--background-size);
+    background: var(--background) var(--background-size);
     background-size: cover;
     width: var(--card-width);
     height: var(--card-height);
     display: grid;
     grid-template-rows: 1fr auto; /* Keep the top flexible and the bottom fixed */
     /*animation: resize_test 2s cubic-bezier(1, 0, 0, 1) infinite;*/
+    animation-fill-mode: forwards;
+}
+
+.player_card_base.default {
+    width: 128px;
+    height: 128px;
+}
+
+.player_card_base.end-state {
+    width: 128px; /* End state */
+    height: 128px; /* End state */
 }
 
 @keyframes resize_test {
