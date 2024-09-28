@@ -1,4 +1,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap" rel="stylesheet">
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+
+
 <!DOCTYPE html>
 <script type="text/javascript" src="jquery-3.7.1.min.js"></script>
 <html lang="en">
@@ -45,6 +48,14 @@
         const playerCard = document.getElementById(id);
         playerCard.classList.toggle('end-state');
     }
+    function setEnd(id){
+        const playerCard = document.getElementById(id);
+        playerCard.classList.add('end-state');
+    }
+    function setStart(id){
+        const playerCard = document.getElementById(id);
+        playerCard.classList.remove('end-state');
+    }
     function addTransition(id) {
         const playerCard = document.getElementById(id);
         //'width 2s cubic-bezier(1, 0, 0, 1), height 2s cubic-bezier(1, 0, 0, 1)'
@@ -62,24 +73,37 @@
         username.textContent=playerUsername;
     }
 
-    // Example of changing the images
-    changeCardImage("playerCard1", "../Patron/Cards/DefaultBackup.png");
-    changeCardImage("playerCard2", "https://deadlocked.wiki/images/4/49/Bebop_card.png");
-    changeCardImage("playerCard3", "https://deadlocked.wiki/images/7/70/Dynamo_card.png");
-    changeCardImage("playerCard4", "https://deadlocked.wiki/images/6/6b/Infernus_card.png");
-    changeCardImage("playerCard5", "https://deadlocked.wiki/images/e/e8/Lady_Geist_card.png");
-    changeCardImage("playerCard6", "https://deadlocked.wiki/images/5/55/McGinnis_card.png");
+    // Connect to the WebSocket server
+    const socket = io.connect('http://127.0.0.1:5000', {
+        reconnection: true,  // Enable reconnection
+        reconnectionAttempts: Infinity, // Attempt to reconnect indefinitely
+        reconnectionDelay: 1000, // Delay between attempts (in milliseconds)
+    });
 
-    changeCardText("playerCard1", "Abrams", "MyUsername")
+    // Function to handle incoming data from the WebSocket
+    socket.on('players', (data) => {
+        console.log('Received Data:', data);
+        const updatePlayerCard = (playerIndex) => {
+            const playerData = data[`player${playerIndex}`];
+            console.log(playerData);
+            let characterName = playerData.character.replace(/ /g, "_");
+            console.log(characterName);
+            changeCardText(`playerCard${playerIndex}`, playerData["character"], playerData["username"]);
+            changeCardImage(`playerCard${playerIndex}`, `../Patron/Cards/${characterName}.png`);
+            if (characterName !== "None") {
+                addTransition(`playerCard${playerIndex}`)
+                setStart(`playerCard${playerIndex}`)
+            }
+            else {
+                setEnd(`playerCard${playerIndex}`)
+            }
+        };
 
-    // Example of adding an animation (optional, but transitions are applied automatically)
-    addTransition("playerCard1");
-    addTransition("playerCard2");
+        for (let i = 1; i <= 6; i++) {
+            updatePlayerCard(i);
+        }
+    });
 
-    // Toggle the size when needed
-    document.getElementById("playerCard1").addEventListener("click", () => toggleSize("playerCard1"));
-    toggleSize("playerCard2");
-    document.getElementById("playerCard2").addEventListener("click", () => toggleSize("playerCard2"));
 </script>
 
 </body>
