@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Component with API Updates</title>
+    <script src="my-component.js" defer></script>
+</head>
+<body>
+<!-- Use the custom web components -->
+<my-component id="component1" text="Component 1"></my-component>
+<my-component id="component2" text="Component 2"></my-component>
+<my-component id="component3" text="Component 3"></my-component>
+
+<script>
+    function changeTextRandomly() {
+        //document.getElementById('component1').setAttribute('text', 'ExampleText');
+        document.getElementById('component1').setAttribute('state', 'move100');
+    }
+
+    setInterval(changeTextRandomly, 500)
+</script>
+</body>
+</html>

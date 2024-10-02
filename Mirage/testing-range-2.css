@@ -1,0 +1,34 @@
+.main {
+    position: relative;
+}
+
+.box {
+    position: absolute;
+    transition: .5s cubic-bezier(1, 0, 0, 1);
+}
+
+/* Initial positions */
+.box1 {
+    top: 100px; /* Adjust according to your layout */
+    left: 0;
+    background-color: red;
+    width: 100px;
+    height: 100px;
+}
+
+.box2 {
+    top: 0;
+    left: 0;
+    background-color: blue;
+    width: 100px;
+    height: 100px;
+}
+
+/* Move both boxes on hover of the main div */
+.main:hover .box1 {
+    transform: translateX(100px);
+}
+
+.main:hover .box2 {
+    transform: translateY(100px);
+}
