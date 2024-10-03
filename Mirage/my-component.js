@@ -21,42 +21,33 @@ class MyComponent extends HTMLElement {
         `;
     }
 
+    static stateAttribute = 'state';
     static get observedAttributes() {
-        return ['text', 'state'];
+        // Declare naming
+        return ['text', MyComponent.stateAttribute];
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'text') {
-            console.log('attributeChangedCallback - "text" newValue');
-            this.updateText(newValue);
-        }
-        if (name === 'state') {
-            console.log('attributeChangedCallback - "state" newValue');
-            this.toggleState(newValue);
-        }
+        // Declare callback functions
+        if (name === 'text') {this.updateText(newValue);}
+        if (name === MyComponent.stateAttribute) {this.setState(newValue);}
     }
 
     connectedCallback() {
-        this.shadowRoot.querySelector('#text').style.transition = '0.5s cubic-bezier(1, 0, 0, 1)';
-
-        if (this.hasAttribute('text')) {
-            console.log('connectedCallback - Attribute "text" changed.');
-            this.updateText(this.getAttribute('text'));
-        }
-        if (this.hasAttribute('state')) {
-            console.log('connectedCallback - Attribute "state" changed.');
-            this.toggleState(this.getAttribute('textState'));
-        }
+        this.shadowRoot.querySelector('#text').style.transition = '0.5s cubic-bezier(1, 0, 0, 1)'; // FIXME: not here
+        if (this.hasAttribute('text')) {this.updateText(this.getAttribute('text'));}
+        if (this.hasAttribute(MyComponent.stateAttribute)) {this.setState(this.getAttribute('textState'));}
     }
 
-    toggleState(newState) {
-        const textElement = this.shadowRoot.querySelector('#text');
-        textElement.classList.toggle(newState);
-        console.log('Toggled class:', newState);
+    setState(newState) {
+        const element = this.shadowRoot.querySelector('#text'); // FIXME: element selection should be handled by the attribute route logic? state_boolean for an update is not good enough. maybe id_state_boolean?
+        const stateIndicator = newState.slice(-2); // _1 true, _0 false
+        const stateName = newState.slice(0, -2); // name excluding indicator
+        if (stateIndicator === '_1') {if (!element.classList.contains(stateName)) {element.classList.add(stateName);}} // stateName does not already exist, execute addition
+        if (stateIndicator === '_0') {if (element.classList.contains(stateName)) {element.classList.remove(stateName);}} // stateName exists, execute removal
     }
 
     updateText(newText) {
-        this.shadowRoot.querySelector('#text').style.transition = '0.5s cubic-bezier(1, 0, 0, 1)';
         this.shadowRoot.querySelector('#text').innerText = newText;
     }
 }

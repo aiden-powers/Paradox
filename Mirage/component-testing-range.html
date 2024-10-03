@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +14,17 @@
 <my-component id="component3" text="Component 3"></my-component>
 
 <script>
-    function changeTextRandomly() {
-        //document.getElementById('component1').setAttribute('text', 'ExampleText');
-        document.getElementById('component1').setAttribute('state', 'move100');
-    }
-
-    setInterval(changeTextRandomly, 500)
+    const socket = io.connect('http://127.0.0.1:5000', {
+        reconnection: true,
+        reconnectionAttempts: Infinity,
+        reconnectionDelay: 1000,
+    });
+    socket.on('graphics_events', (data) => {
+        if (data['recipient'] === 'test_screen') {
+            console.log(data);
+            document.getElementById(data['component']).setAttribute(data['attribute'], data['parameter']);
+        }
+    })
 </script>
 </body>
 </html>
