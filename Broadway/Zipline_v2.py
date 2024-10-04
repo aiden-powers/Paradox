@@ -11,6 +11,5 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 def handle_relay(data):
     emit('graphics_events', data, broadcast=True)
 
-
 if __name__ == "__main__":
     socketio.run(app, debug=True, allow_unsafe_werkzeug=True)

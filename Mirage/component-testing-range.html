@@ -5,25 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Component with API Updates</title>
-    <script src="my-component.js" defer></script>
+    <script src="player-card-component.js" defer></script>
 </head>
-<body>
-<!-- Use the custom web components -->
-<my-component id="component1" text="Component 1"></my-component>
-<my-component id="component2" text="Component 2"></my-component>
-<my-component id="component3" text="Component 3"></my-component>
+<body style="margin-top: 100px;">
+    <link rel="stylesheet" href="player-card.css">
+    <div class="player_card_container">
+        <player-card id="component1" text="Component 1"></player-card>
+        <player-card id="component2" text="Component 2"></player-card>
+        <player-card id="component3" text="Component 3"></player-card>
+        <player-card id="component4" text="Component 4"></player-card>
+        <player-card id="component5" text="Component 5"></player-card>
+        <player-card id="component6" text="Component 6"></player-card>
+        </div>
 <script>
+
     const socket = io.connect('http://127.0.0.1:5000', {
         reconnection: true,
         reconnectionAttempts: Infinity,
         reconnectionDelay: 1000,
     });
+
     socket.on('graphics_events', (data) => {
         if (data['recipient'] === 'test_screen') {
             console.log(data);
             document.getElementById(data['component']).setAttribute(data['attribute'], data['parameter']);
         }
     })
+
 </script>
 </body>
 </html>
