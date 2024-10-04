@@ -76,6 +76,5 @@ def setup_gui():
 if __name__ == "__main__":
     # Start the Socket.IO connection in a background thread
     threading.Thread(target=connect_to_server).start()
-
     # Start the customtkinter GUI
     setup_gui()

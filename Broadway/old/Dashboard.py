@@ -2,7 +2,6 @@ import customtkinter as ctk
 import socketio
 import threading
 import Characters
-import requests
 
 # Connect to the WebSocket server
 sio = socketio.Client()
