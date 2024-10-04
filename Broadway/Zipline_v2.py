@@ -9,8 +9,6 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 @socketio.on('relay')
 def handle_relay(data):
-    relay = data.get('recipient')
-    print(relay)
     emit('graphics_events', data, broadcast=True)
 
 
