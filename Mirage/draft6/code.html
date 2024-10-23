@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esports Interface Animation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="interface">
+  <div id="group1Container"></div>
+  <div id="group2Container"></div>
+</div>
+<button id="animateBtn">Toggle Animation</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+<script src="states.js"></script>
+<script>
+  const animateBtn = document.getElementById('animateBtn');
+  let currentState = 0;
+
+  // Load group HTML files
+  fetch('group1.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('group1Container').innerHTML = data;
+          });
+
+  fetch('group2.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('group2Container').innerHTML = data;
+          });
+
+  animateBtn.addEventListener('click', () => {
+    const nextState = (currentState + 1) % Object.keys(states).length;
+
+    gsap.to("#group1", states[nextState].group1);
+    gsap.to("#group2", states[nextState].group2);
+
+    currentState = nextState; // Update the current state
+  });
+</script>
+</body>
+</html>
