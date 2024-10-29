@@ -18,8 +18,6 @@
       left: 20px;
       top: 20px;
 
-      width: 250px;
-      height: 40px;
       position: fixed;
       display: flex;
       flex-direction: row;
@@ -27,16 +25,13 @@
       padding-left: 10px;
       padding-right: 10px;
       align-items: center;
+      gap: 10px;
     }
 
     .nextMatchContainer {
-      left: 20px;
-      top: 20px;
-
       width: 250px;
       height: 40px;
       background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
-      position: fixed;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -70,13 +65,9 @@
     }
 
     .nextMatchTeamsContainer {
-      left: 280px;
-      top: 20px;
-
       width: 480px;
       height: 40px;
       background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
-      position: fixed;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -102,13 +93,9 @@
     }
 
     .broadcastLocationContainer {
-      left: 770px;
-      top: 20px;
-
       width: 110px;
       height: 40px;
       background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
-      position: fixed;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -126,13 +113,9 @@
     }
 
     .broadcastIdentifier {
-      left: 890px;
-      top: 20px;
-
       width: 340px;
       height: 40px;
       background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
-      position: fixed;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -151,26 +134,28 @@
 
     </style>
 
-  <div class="nextMatchContainer">
-    <div class="nextMatchText">NEXT MATCH</div>
-    <div class="nextMatchCounter" id="nextMatchCounter">00:00</div>
-    <div class="nextMatchCounterMs" id="nextMatchCounterMs">:00</div>
-  </div>
+  <div class="matchWidgetsContainer">
+    <div class="nextMatchContainer">
+      <div class="nextMatchText">NEXT MATCH</div>
+      <div class="nextMatchCounter" id="nextMatchCounter">00:00</div>
+      <div class="nextMatchCounterMs" id="nextMatchCounterMs">:00</div>
+    </div>
 
-  <div class="nextMatchTeamsContainer">
-    <div class="nextMatchTeamsText">RDTEAM</div>
-    <div class="nextMatchVsText">VS</div>
-    <div class="nextMatchTeamsText">BLTEAM</div>
-  </div>
+    <div class="nextMatchTeamsContainer">
+      <div class="nextMatchTeamsText">RDTEAM</div>
+      <div class="nextMatchVsText">VS</div>
+      <div class="nextMatchTeamsText">BLTEAM</div>
+    </div>
 
-  <div class="broadcastLocationContainer">
-    <img src = "TwitchIcon.svg" alt="My Happy SVG"/>
-    <div class="broadcastLocationText">HERE</div>
-  </div>
+    <div class="broadcastLocationContainer">
+      <img src = "TwitchIcon.svg" alt="My Happy SVG"/>
+      <div class="broadcastLocationText">HERE</div>
+    </div>
 
-  <div class="broadcastIdentifier">
-    <div class="broadcastIdentifierText">THROWDOWN EUROPE</div>
-    <img src = "ThrowdownIconSmall.svg" alt="My Happy SVG"/>
+    <div class="broadcastIdentifier">
+      <div class="broadcastIdentifierText">THROWDOWN EUROPE</div>
+      <img src = "ThrowdownIconSmall.svg" alt="My Happy SVG"/>
+    </div>
   </div>
 
 
@@ -225,5 +210,5 @@
     }
 
     // Update the team names every 50ms
-    //setInterval(updateTeamsText, 50);
+    setInterval(updateTeamsText, 32);
   </script>
