@@ -236,17 +236,25 @@
     const broadcastLocationContainer = document.querySelector('.broadcastLocationContainer');
     const broadcastIdentifier = document.querySelector('.broadcastIdentifierContainer');
 
+    nextMatchContainer.style.left="";
     nextMatchContainer.style.right="10px";
     nextMatchContainer.style.top="10px";
+    nextMatchContainer.style.bottom="";
 
+    nextMatchTeamsContainer.style.left="";
     nextMatchTeamsContainer.style.right="10px";
     nextMatchTeamsContainer.style.top="60px";
+    nextMatchTeamsContainer.style.bottom="";
 
+    broadcastLocationContainer.style.left="";
     broadcastLocationContainer.style.right="10px";
     broadcastLocationContainer.style.top="110px";
+    broadcastLocationContainer.style.bottom="";
 
+    broadcastIdentifier.style.left="";
     broadcastIdentifier.style.right="10px";
     broadcastIdentifier.style.top="160px";
+    broadcastIdentifier.style.bottom="";
 
     Flip.from(nextMatchContainerState, transitionDefault);
     Flip.from(nextMatchTeamsContainerState, transitionDefault);
