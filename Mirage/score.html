@@ -14,6 +14,21 @@
       box-sizing: border-box;
     }
 
+    .matchWidgetsContainer {
+      left: 20px;
+      top: 20px;
+
+      width: 250px;
+      height: 40px;
+      position: fixed;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-left: 10px;
+      padding-right: 10px;
+      align-items: center;
+    }
+
     .nextMatchContainer {
       left: 20px;
       top: 20px;
@@ -46,6 +61,14 @@
       color: #FFFFFF;
     }
 
+    .nextMatchCounterMs {
+      font-family: 'SUSE', sans-serif; /* https://fonts.google.com/specimen/SUSE is weight 0-800 */
+      font-style: normal;
+      font-variation-settings: "wght" 800;
+      font-size: 12px;
+      color: #FFFFFF;
+    }
+
     .nextMatchTeamsContainer {
       left: 280px;
       top: 20px;
@@ -73,8 +96,56 @@
     .nextMatchVsText {
       font-family: 'Big Shoulders Display', sans-serif; /* https://fonts.google.com/specimen/Big+Shoulders+Display is weight 100-900 */
       font-style: normal;
-      font-variation-settings: "wght" 900;
+      font-variation-settings: "wght" 600;
       font-size: 18px;
+      color: #FFFFFF;
+    }
+
+    .broadcastLocationContainer {
+      left: 770px;
+      top: 20px;
+
+      width: 110px;
+      height: 40px;
+      background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
+      position: fixed;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-left: 10px;
+      padding-right: 10px;
+      align-items: center;
+    }
+
+    .broadcastLocationText {
+      font-family: 'Inter Tight', sans-serif; /* https://fonts.google.com/specimen/Inter+Tight is weight 0-900, italic 0-1 */
+      font-style: normal;
+      font-variation-settings: "wght" 900;
+      font-size: 24px;
+      color: #FFFFFF;
+    }
+
+    .broadcastIdentifier {
+      left: 890px;
+      top: 20px;
+
+      width: 340px;
+      height: 40px;
+      background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
+      position: fixed;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-left: 10px;
+      padding-right: 10px;
+      align-items: center;
+    }
+
+    .broadcastIdentifierText {
+      font-family: 'Big Shoulders Display', sans-serif; /* https://fonts.google.com/specimen/Big+Shoulders+Display is weight 100-900 */
+      font-style: normal;
+      font-variation-settings: "wght" 800;
+      font-size: 32px;
       color: #FFFFFF;
     }
 
@@ -82,14 +153,27 @@
 
   <div class="nextMatchContainer">
     <div class="nextMatchText">NEXT MATCH</div>
-    <div class="nextMatchCounter" id="nextMatchCounter">58:08</div>
+    <div class="nextMatchCounter" id="nextMatchCounter">00:00</div>
+    <div class="nextMatchCounterMs" id="nextMatchCounterMs">:00</div>
   </div>
 
   <div class="nextMatchTeamsContainer">
-    <div class="nextMatchTeamsText">NOUNS_</div>
+    <div class="nextMatchTeamsText">RDTEAM</div>
     <div class="nextMatchVsText">VS</div>
-    <div class="nextMatchTeamsText">CATFND</div>
+    <div class="nextMatchTeamsText">BLTEAM</div>
   </div>
+
+  <div class="broadcastLocationContainer">
+    <img src = "TwitchIcon.svg" alt="My Happy SVG"/>
+    <div class="broadcastLocationText">HERE</div>
+  </div>
+
+  <div class="broadcastIdentifier">
+    <div class="broadcastIdentifierText">THROWDOWN EUROPE</div>
+    <img src = "ThrowdownIconSmall.svg" alt="My Happy SVG"/>
+  </div>
+
+
 
   <script>
     // Set the target timestamp (Year, Month - 1, Day, Hour, Minute, Second)
@@ -100,21 +184,23 @@
       const timeDifference = targetDate - now;
 
       if (timeDifference <= 0) {
-        document.getElementById("nextMatchCounter").textContent = "00:00";
+        document.getElementById("nextMatchCounter").textContent = "00:00:00";
         clearInterval(countdownInterval); // Stop the countdown when it reaches 0
         return;
       }
 
-      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+      let milliseconds = Math.floor(timeDifference % 1000);
+      const seconds = Math.floor((timeDifference / 1000) % 60);
+      const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
+      milliseconds = Math.trunc(milliseconds/10) // 2 spaces instead of 3
 
-      // Format minutes and seconds with leading zeros if needed
-      document.getElementById("nextMatchCounter").textContent =
-              `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      // Format milliseconds, seconds, and minutes with leading zeros if needed
+      document.getElementById("nextMatchCounter").textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      document.getElementById("nextMatchCounterMs").textContent = `:${milliseconds.toString().padStart(2, '0')}`;
     }
 
     // Update the countdown every second
-    const countdownInterval = setInterval(updateCountdown, 1000);
+    const countdownInterval = setInterval(updateCountdown, 32); // 32 = 30fps, 16 = 60fps
 
     // Initialize countdown display
     updateCountdown();
@@ -139,5 +225,5 @@
     }
 
     // Update the team names every 50ms
-    setInterval(updateTeamsText, 50);
+    //setInterval(updateTeamsText, 50);
   </script>
