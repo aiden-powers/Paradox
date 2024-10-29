@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Match Countdown</title>
+
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Spline+Sans+Mono:ital,wght@0,300..700;1,300..700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .nextMatchContainer {
+      left: 20px;
+      top: 20px;
+
+      width: 250px;
+      height: 40px;
+      background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
+      position: fixed;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-left: 10px;
+      padding-right: 10px;
+      align-items: center;
+    }
+
+    .nextMatchText {
+      font-family: 'Inter Tight', sans-serif;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 18px;
+      color: #0077B6;
+    }
+
+    .nextMatchCounter {
+      font-family: 'Open Sans', sans-serif;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 28px;
+      color: #FFFFFF;
+    }
+
+    .nextMatchTeamsContainer {
+      left: 280px;
+      top: 20px;
+
+      width: 480px;
+      height: 40px;
+      background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
+      position: fixed;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-left: 10px;
+      padding-right: 10px;
+      align-items: center;
+    }
+
+    .nextMatchTeamsText {
+      font-family: 'Open Sans', sans-serif;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 28px;
+      color: #FFFFFF;
+    }
+
+    .nextMatchVsText {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 18px;
+      color: #FFFFFF;
+    }
+
+    </style>
+
+  <div class="nextMatchContainer">
+    <div class="nextMatchText">NEXT MATCH</div>
+    <div class="nextMatchCounter" id="nextMatchCounter">58:08</div>
+  </div>
+
+  <div class="nextMatchTeamsContainer">
+    <div class="nextMatchTeamsText">NOUNS_</div>
+    <div class="nextMatchVsText">VS</div>
+    <div class="nextMatchTeamsText">CATFND</div>
+  </div>
+
+  <script>
+    // Set the target timestamp (Year, Month - 1, Day, Hour, Minute, Second)
+    const targetDate = new Date(2024, 10, 29, 18, 0, 0); // Example: Nov 29, 2024, 18:00:00
+
+    function updateCountdown() {
+      const now = new Date();
+      const timeDifference = targetDate - now;
+
+      if (timeDifference <= 0) {
+        document.getElementById("nextMatchCounter").textContent = "00:00";
+        clearInterval(countdownInterval); // Stop the countdown when it reaches 0
+        return;
+      }
+
+      const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      // Format minutes and seconds with leading zeros if needed
+      document.getElementById("nextMatchCounter").textContent =
+              `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // Update the countdown every second
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Initialize countdown display
+    updateCountdown();
+  </script>
+
+  <script>
+    function getRandomLetters(length) {
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      let result = '';
+      for (let i = 0; i < length; i++) {
+        result += letters.charAt(Math.floor(Math.random() * letters.length));
+      }
+      return result;
+    }
+
+    function updateTeamsText() {
+      // Select all elements with the class 'nextMatchTeamsText'
+      const teamElements = document.querySelectorAll('.nextMatchTeamsText');
+      teamElements.forEach(element => {
+        element.textContent = getRandomLetters(6); // Set random letters
+      });
+    }
+
+    // Update the team names every 50ms
+    setInterval(updateTeamsText, 50);
+  </script>
