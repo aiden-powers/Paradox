@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Match Countdown</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
   <style>
 
     @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=SUSE:wght@100..800&family=Spline+Sans+Mono:ital,wght@0,300..700;1,300..700&display=swap');
@@ -14,21 +17,8 @@
       box-sizing: border-box;
     }
 
-    .matchWidgetsContainer {
-      left: 20px;
-      top: 20px;
-
-      position: fixed;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding-left: 10px;
-      padding-right: 10px;
-      align-items: center;
-      gap: 10px;
-    }
-
     .nextMatchContainer {
+      position: fixed;
       width: 250px;
       height: 40px;
       background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
@@ -65,6 +55,7 @@
     }
 
     .nextMatchTeamsContainer {
+      position: fixed;
       width: 480px;
       height: 40px;
       background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
@@ -93,6 +84,7 @@
     }
 
     .broadcastLocationContainer {
+      position: fixed;
       width: 110px;
       height: 40px;
       background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
@@ -112,7 +104,8 @@
       color: #FFFFFF;
     }
 
-    .broadcastIdentifier {
+    .broadcastIdentifierContainer {
+      position: fixed;
       width: 340px;
       height: 40px;
       background: #1A1A1AE6; /* #1A1A1A at 80% opacity*/
@@ -134,31 +127,27 @@
 
     </style>
 
-  <div class="matchWidgetsContainer">
-    <div class="nextMatchContainer">
-      <div class="nextMatchText">NEXT MATCH</div>
-      <div class="nextMatchCounter" id="nextMatchCounter">00:00</div>
-      <div class="nextMatchCounterMs" id="nextMatchCounterMs">:00</div>
-    </div>
-
-    <div class="nextMatchTeamsContainer">
-      <div class="nextMatchTeamsText">RDTEAM</div>
-      <div class="nextMatchVsText">VS</div>
-      <div class="nextMatchTeamsText">BLTEAM</div>
-    </div>
-
-    <div class="broadcastLocationContainer">
-      <img src = "TwitchIcon.svg" alt="My Happy SVG"/>
-      <div class="broadcastLocationText">HERE</div>
-    </div>
-
-    <div class="broadcastIdentifier">
-      <div class="broadcastIdentifierText">THROWDOWN EUROPE</div>
-      <img src = "ThrowdownIconSmall.svg" alt="My Happy SVG"/>
-    </div>
+  <div class="nextMatchContainer">
+    <div class="nextMatchText">NEXT MATCH</div>
+    <div class="nextMatchCounter" id="nextMatchCounter">00:00</div>
+    <div class="nextMatchCounterMs" id="nextMatchCounterMs">:00</div>
   </div>
 
+  <div class="nextMatchTeamsContainer" id="nextMatchTeamsContainer">
+    <div class="nextMatchTeamsText">RDTEAM</div>
+    <div class="nextMatchVsText">VS</div>
+    <div class="nextMatchTeamsText">BLTEAM</div>
+  </div>
 
+  <div class="broadcastLocationContainer">
+    <img src = "TwitchIcon.svg" alt="My Happy SVG"/>
+    <div class="broadcastLocationText">HERE</div>
+  </div>
+
+  <div class="broadcastIdentifierContainer">
+    <div class="broadcastIdentifierText">THROWDOWN EUROPE</div>
+    <img src = "ThrowdownIconSmall.svg" alt="My Happy SVG"/>
+  </div>
 
   <script>
     // Set the target timestamp (Year, Month - 1, Day, Hour, Minute, Second)
@@ -211,4 +200,56 @@
 
     // Update the team names every 50ms
     //setInterval(updateTeamsText, 32);
+  </script>
+
+  <script>
+    gsap.registerPlugin(Flip);
+    gsap.registerPlugin(CustomEase);
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function tog() {
+
+        const el = document.getElementById("nextMatchTeamsContainer");
+        gsap.to(el, {width: "800px", duration: .5, ease: "power1.inOut"});
+    }
+    //setInterval(tog, 1000);
+
+    CustomEase.create("hop","M0,0 C0.5,0 0.5,0 0.5,0.5 0.5,1 0.5,1 1,1")
+
+    const transitionDefault = {
+      duration: 1,
+      ease: "hop",
+      absolute: true,
+      onComplete: console.log("yup"),
+    };
+
+    const nextMatchContainerState = Flip.getState(".nextMatchContainer");
+    const nextMatchTeamsContainerState = Flip.getState(".nextMatchTeamsContainer");
+    const broadcastLocationContainerState = Flip.getState(".broadcastLocationContainer");
+    const broadcastIdentifierState = Flip.getState(".broadcastIdentifierContainer");
+
+    const nextMatchContainer = document.querySelector('.nextMatchContainer');
+    const nextMatchTeamsContainer = document.querySelector('.nextMatchTeamsContainer');
+    const broadcastLocationContainer = document.querySelector('.broadcastLocationContainer');
+    const broadcastIdentifier = document.querySelector('.broadcastIdentifierContainer');
+
+    nextMatchContainer.style.right="10px";
+    nextMatchContainer.style.top="10px";
+
+    nextMatchTeamsContainer.style.right="10px";
+    nextMatchTeamsContainer.style.top="60px";
+
+    broadcastLocationContainer.style.right="10px";
+    broadcastLocationContainer.style.top="110px";
+
+    broadcastIdentifier.style.right="10px";
+    broadcastIdentifier.style.top="160px";
+
+    Flip.from(nextMatchContainerState, transitionDefault);
+    Flip.from(nextMatchTeamsContainerState, transitionDefault);
+    Flip.from(broadcastLocationContainerState, transitionDefault);
+    Flip.from(broadcastIdentifierState, transitionDefault);
   </script>
