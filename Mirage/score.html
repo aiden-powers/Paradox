@@ -219,7 +219,7 @@
     CustomEase.create("hop","M0,0 C0.5,0 0.5,0 0.5,0.5 0.5,1 0.5,1 1,1")
 
     const transitionDefault = {
-      duration: 1,
+      duration: .5,
       ease: "hop",
       absolute: true,
       onComplete: console.log("yup"),
@@ -278,20 +278,37 @@
       const minRightPosition = 0;
       const maxRightPosition = window.innerWidth - Container.offsetWidth; // Account for element width
       const currentRightPosition = Math.floor(Math.random() * (maxRightPosition - minRightPosition + 1)) + minRightPosition;
-      Container.style.left = "";
-      Container.style.right = `${currentRightPosition}px`;
-      //Container.style.top = "10px";
-      Container.style.bottom = "";
+
+      if (Math.random() >= .5) {
+        Container.style.left = `${currentRightPosition}px`;
+        Container.style.right = "";
+      }
+      else {
+        Container.style.left = "";
+        Container.style.right = `${currentRightPosition}px`;
+      }
+
       Flip.from(ContainerState, transitionDefault);
     }
 
-    function changetwo(){
-      change('.nextMatchContainer')
-      change('.nextMatchTeamsContainer')
-      change('.broadcastLocationContainer')
-      change('.broadcastIdentifierContainer')
-      console.log("Changetwo")
+    async function changetwo() {
+
+      const delayPromise = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+      await delayPromise(Math.floor(Math.random()*1000));
+      change('.nextMatchContainer');
+
+      await delayPromise(Math.floor(Math.random()*1000));
+      change('.nextMatchTeamsContainer');
+
+      await delayPromise(Math.floor(Math.random()*1000));
+      change('.broadcastLocationContainer');
+
+      await delayPromise(Math.floor(Math.random()*1000));
+      change('.broadcastIdentifierContainer');
+
+      console.log("Changetwo");
     }
 
-    setInterval(changetwo, 1100);
+    setInterval(changetwo, 500);
   </script>
