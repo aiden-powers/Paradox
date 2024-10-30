@@ -211,7 +211,6 @@
     }
 
     function tog() {
-
         const el = document.getElementById("nextMatchTeamsContainer");
         gsap.to(el, {width: "800px", duration: .5, ease: "power1.inOut"});
     }
@@ -226,6 +225,18 @@
       onComplete: console.log("yup"),
     };
 
+    function resetDirectionalPositions(ObjectName){
+      document.querySelector(ObjectName).style.top="";
+      document.querySelector(ObjectName).style.bottom="";
+      document.querySelector(ObjectName).style.left="";
+      document.querySelector(ObjectName).style.right="";
+    }
+
+    const Directions = Object.freeze({
+      LEFT:   Symbol("left"),
+      RIGHT:  Symbol("right")
+    });
+
     const nextMatchContainerState = Flip.getState(".nextMatchContainer");
     const nextMatchTeamsContainerState = Flip.getState(".nextMatchTeamsContainer");
     const broadcastLocationContainerState = Flip.getState(".broadcastLocationContainer");
@@ -234,7 +245,7 @@
     const nextMatchContainer = document.querySelector('.nextMatchContainer');
     const nextMatchTeamsContainer = document.querySelector('.nextMatchTeamsContainer');
     const broadcastLocationContainer = document.querySelector('.broadcastLocationContainer');
-    const broadcastIdentifier = document.querySelector('.broadcastIdentifierContainer');
+    const broadcastIdentifierContainer = document.querySelector('.broadcastIdentifierContainer');
 
     nextMatchContainer.style.left="";
     nextMatchContainer.style.right="10px";
@@ -251,13 +262,36 @@
     broadcastLocationContainer.style.top="110px";
     broadcastLocationContainer.style.bottom="";
 
-    broadcastIdentifier.style.left="";
-    broadcastIdentifier.style.right="10px";
-    broadcastIdentifier.style.top="160px";
-    broadcastIdentifier.style.bottom="";
+    broadcastIdentifierContainer.style.left="";
+    broadcastIdentifierContainer.style.right="10px";
+    broadcastIdentifierContainer.style.top="160px";
+    broadcastIdentifierContainer.style.bottom="";
 
     Flip.from(nextMatchContainerState, transitionDefault);
     Flip.from(nextMatchTeamsContainerState, transitionDefault);
     Flip.from(broadcastLocationContainerState, transitionDefault);
     Flip.from(broadcastIdentifierState, transitionDefault);
+
+    function change(ObjectName){
+      const ContainerState = Flip.getState(ObjectName);
+      const Container = document.querySelector(ObjectName);
+      const minRightPosition = 0;
+      const maxRightPosition = window.innerWidth - Container.offsetWidth; // Account for element width
+      const currentRightPosition = Math.floor(Math.random() * (maxRightPosition - minRightPosition + 1)) + minRightPosition;
+      Container.style.left = "";
+      Container.style.right = `${currentRightPosition}px`;
+      //Container.style.top = "10px";
+      Container.style.bottom = "";
+      Flip.from(ContainerState, transitionDefault);
+    }
+
+    function changetwo(){
+      change('.nextMatchContainer')
+      change('.nextMatchTeamsContainer')
+      change('.broadcastLocationContainer')
+      change('.broadcastIdentifierContainer')
+      console.log("Changetwo")
+    }
+
+    setInterval(changetwo, 1100);
   </script>
