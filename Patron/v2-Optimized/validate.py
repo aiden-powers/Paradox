@@ -9,8 +9,6 @@ if os.path.isdir(parent_dir_file):
     entries = os.listdir(parent_dir_file)
     for entry in entries:
         full_path = os.path.join(parent_dir_file, entry)
-        #print(f"Entry: {entry}, Full Path: {full_path}, Is Directory: {os.path.isdir(full_path)}")
-        # Check if Card.png exists in this folder
         ignore_validate = ['characters.json', 'properties.json', 'readme.md', 'validate.py']
         if entry not in ignore_validate:
             validate_card = os.path.join(full_path, "Card.png")
