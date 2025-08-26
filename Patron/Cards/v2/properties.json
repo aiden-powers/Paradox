@@ -1,0 +1,41 @@
+{
+    "version": "2.0",
+    "_comment": "Names must be lowercase",
+    "graphics": {
+        "character_selection_render": [
+            {"name": "abrams", "x_offset": 0, "y_offset": 0},
+            {"name": "bebop", "x_offset": 0, "y_offset": 0},
+            {"name": "billy", "x_offset": 0, "y_offset": 0},
+            {"name": "calico", "x_offset": 0, "y_offset": 0},
+            {"name": "the doorman", "x_offset": 0, "y_offset": 0},
+            {"name": "drifter", "x_offset": 0, "y_offset": 0},
+            {"name": "dynamo", "x_offset": 0, "y_offset": 0},
+            {"name": "grey talon", "x_offset": 0, "y_offset": 0},
+            {"name": "haze", "x_offset": 0, "y_offset": 0},
+            {"name": "holliday", "x_offset": 0, "y_offset": 0},
+            {"name": "infernus", "x_offset": 0, "y_offset": 0},
+            {"name": "ivy", "x_offset": 0, "y_offset": 0},
+            {"name": "kelvin", "x_offset": 0, "y_offset": 0},
+            {"name": "lady geist", "x_offset": 0, "y_offset": 0},
+            {"name": "lash", "x_offset": 0, "y_offset": 0},
+            {"name": "mcginnis", "x_offset": 0, "y_offset": 0},
+            {"name": "mina", "x_offset": 0, "y_offset": 0},
+            {"name": "mirage", "x_offset": 0, "y_offset": 0},
+            {"name": "mo & krill", "x_offset": 0, "y_offset": 0},
+            {"name": "paige", "x_offset": 0, "y_offset": 0},
+            {"name": "paradox", "x_offset": 0, "y_offset": 0},
+            {"name": "pocket", "x_offset": 0, "y_offset": 0},
+            {"name": "seven", "x_offset": 0, "y_offset": 0},
+            {"name": "shiv", "x_offset": 0, "y_offset": 0},
+            {"name": "sinclair", "x_offset": 0, "y_offset": 0},
+            {"name": "victor", "x_offset": 0, "y_offset": 0},
+            {"name": "vindicta", "x_offset": 0, "y_offset": 0},
+            {"name": "viscous", "x_offset": 0, "y_offset": 0},
+            {"name": "vyper", "x_offset": 0, "y_offset": 0},
+            {"name": "warden", "x_offset": 0, "y_offset": 0},
+            {"name": "wraith", "x_offset": 0, "y_offset": 0},
+            {"name": "yamato", "x_offset": 0, "y_offset": 0},
+            {"name": "example", "x_offset": 0, "y_offset": 0}
+        ]
+    }
+}
